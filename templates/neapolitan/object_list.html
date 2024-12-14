@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% load neapolitan %} {% block content %}
+
+<div class="sm:flex sm:items-center content">
+  <h1 class="sm:flex-auto">{{ object_verbose_name_plural|capfirst }}</h1>
+  {% if create_view_url %}
+  <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+    <a class="button is-success" href="{{ create_view_url }}"
+      >Add a new {{ object_verbose_name }}</a
+    >
+  </div>
+  {% endif %}
+</div>
+
+{% if object_list %}
+<c-table>
+  <thead>
+    <tr>
+      Amount
+    </tr>
+  </thead>
+  <tbody>
+    {% for obj in object_list %}
+    <tr>
+      <td>{{obj.balance}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</c-table>
+{% else %}
+<p class="mt-8">
+  There are no {{ object_verbose_name_plural }}. Create one now?
+</p>
+{% endif %}
+
+<hr />
+
+{% endblock %}

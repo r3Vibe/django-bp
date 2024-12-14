@@ -1,0 +1,33 @@
+{% extends 'unfold/layouts/base_simple.html' %} {% load cache humanize i18n
+unfold %} {% block breadcrumbs %}{% endblock %} {% block title %} {% if subtitle
+%} {{ subtitle }} | {% endif %} {{ title }} | {{ site_title|default:_('Django
+site admin') }} {% endblock %} {% block branding %}
+<h1 id="site-name">
+  <a href="{% url 'admin:index' %}">
+    {{ site_header|default:_('Django administration') }}
+  </a>
+</h1>
+{% endblock %} {% block content %}
+
+<div style="width: 800px"><canvas id="acquisitions"></canvas></div>
+
+<h1>Chartjs is used here and supported here</h1>
+
+<script>
+  (async function () {
+    const data = {{data}}
+    new Chart(document.getElementById("acquisitions"), {
+      type: "bar",
+      data: {
+        labels: {{labels}},
+        datasets: [
+          {
+            label: "Acquisitions by year",
+            data,
+          },
+        ],
+      },
+    });
+  })();
+</script>
+{% endblock %}
